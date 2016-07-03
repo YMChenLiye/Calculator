@@ -18,7 +18,7 @@ double AddNode::Calc() const
 	return left_->Calc() + right_->Calc();
 }
 
-double SubdNode::Calc() const
+double SubNode::Calc() const
 {
 	return left_->Calc() - right_->Calc();
 }

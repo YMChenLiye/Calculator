@@ -53,10 +53,10 @@ public:
 	double Calc() const;
 };
 
-class SubdNode :public BinaryNode
+class SubNode :public BinaryNode
 {
 public:
-	SubdNode(Node* left, Node* right) :BinaryNode(left, right) {}
+	SubNode(Node* left, Node* right) :BinaryNode(left, right) {}
 	double Calc() const;
 };
 

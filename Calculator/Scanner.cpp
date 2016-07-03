@@ -3,6 +3,7 @@
 
 Scanner::Scanner(const std::string & buf) :buf_(buf), curPos_(0)
 {
+	Accept();
 }
 
 double Scanner::Number() const
