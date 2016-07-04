@@ -16,6 +16,7 @@ enum EToken
 	TOKEN_IDENTIFIER,
 	TOKEN_ASSIGN
 };
+
 class Scanner
 {
 public:
