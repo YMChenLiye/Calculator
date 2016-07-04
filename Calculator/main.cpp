@@ -17,9 +17,20 @@ int main(void)
 		std::getline(std::cin, buf);
 		//std::cout << buf << endl;
 		Scanner scanner(buf);
-		Parser parse(scanner,calc);
-		parse.Parse();
-		std::cout << parse.Calculate() << std::endl;
+		if (!scanner.IsEmpty())
+		{
+			Parser parse(scanner, calc);
+			status = parse.Parse();
+			if (status == STATUS_OK)
+			{
+				std::cout << parse.Calculate() << std::endl;
+			}
+			else
+				std::cout << "Syntax Error." << std::endl;
+		}
+		else
+			std::cout << "Expression is empty" << std::endl;
+
 
 	} while (status != STATUS_QUIT);
 	return 0;

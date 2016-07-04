@@ -7,13 +7,19 @@
 #include <iostream>
 
 
-Parser::Parser(Scanner& scanner, Calc& calc) :scanner_(scanner), calc_(calc), tree_(0)
+Parser::Parser(Scanner& scanner, Calc& calc) :scanner_(scanner), calc_(calc), tree_(0), status_(STATUS_OK)
 {
 }
 
-void Parser::Parse()
+STATUS Parser::Parse()
 {
 	tree_ = Expr();
+	if (!scanner_.IsDone())
+	{
+		status_ = STATUS_ERROR;
+	}
+
+	return status_;
 }
 
 Node* Parser::Expr()
