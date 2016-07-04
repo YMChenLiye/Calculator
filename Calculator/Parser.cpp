@@ -1,12 +1,13 @@
 #include "Parser.h"
 #include "Scanner.h"
 #include "Node.h"
+#include "Calc.h"
 
 #include <cassert>
 #include <iostream>
 
 
-Parser::Parser(Scanner& scanner) :scanner_(scanner), tree_(0)
+Parser::Parser(Scanner& scanner, Calc& calc) :scanner_(scanner), calc_(calc), tree_(0)
 {
 }
 
@@ -45,6 +46,22 @@ Node* Parser::Expr()
 		} while (token == TOKEN_PLUS || token==TOKEN_MINUS);
 		node = multipleNode;
 	}
+	else if (token == TOKEN_ASSIGN)
+	{
+		//Expr := Term = Expr
+		scanner_.Accept();
+		Node* nodeRight = Expr();
+		if (node->IsLvalue())
+		{
+			node = new AssignNode(node, nodeRight);
+		}
+		else
+		{
+			status_ = STATUS_ERROR;
+			std::cout << "The left-hand side of an assignment must be a variable" << std::endl;
+			//todo throw exception
+		}
+	}
 	return node;
 }
 
@@ -78,6 +95,7 @@ Node* Parser::Term()
 		} while (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE);
 		node = multipleNode;
 	}
+
 	return node;
 }
 
@@ -105,6 +123,17 @@ Node* Parser::Factor()
 	{
 		node = new NumberNode(scanner_.Number());
 		scanner_.Accept();
+	}
+	else if (token == TOKEN_IDENTIFIER)
+	{
+		std::string symbol = scanner_.GetSymbol();
+		unsigned int id = calc_.FindSymbol(symbol);
+		scanner_.Accept();
+		if (id == SymbolTable::IDNOTFOUND)
+		{
+			id = calc_.AddSymbol(symbol);
+		}
+		node = new VariableNode(id, calc_.GetStorage());
 	}
 	else if (token == TOKEN_MINUS)
 	{

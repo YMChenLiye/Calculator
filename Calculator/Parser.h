@@ -2,6 +2,7 @@
 #define _PARSER_H_
 class Node;
 class Scanner;
+class Calc;
 
 enum STATUS
 {
@@ -13,7 +14,7 @@ enum STATUS
 class Parser
 {
 public:
-	Parser(Scanner& scanner);
+	Parser(Scanner& scanner, Calc& calc);
 	void Parse();
 	Node* Expr();
 	Node* Term();
@@ -21,6 +22,7 @@ public:
 	double Calculate() const;
 private:
 	Scanner& scanner_;
+	Calc& calc_;
 	Node* tree_;
 	STATUS status_;
 };
