@@ -135,3 +135,8 @@ double AssignNode::Calc() const
 	left_->Assign(x);
 	return x;
 }
+
+double FunctionNode::Calc() const
+{
+	return (*pFun_)(child_->Calc());
+}

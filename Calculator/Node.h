@@ -1,6 +1,7 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
+#include "FunctionTable.h"
 #include "Storage.h"
 #include <vector>
 #include <cassert>
@@ -56,6 +57,16 @@ public:
 	~UnaryNode();
 protected:
 	Node* const child_;
+};
+
+class FunctionNode :public UnaryNode
+{
+public:
+	FunctionNode(Node* child, PtrFun pFun)
+		:UnaryNode(child), pFun_(pFun) {}
+	double Calc() const;
+private:
+	PtrFun pFun_;
 };
 
 //class AddNode :public BinaryNode

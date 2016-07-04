@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calc.cpp" />
+    <ClCompile Include="FunctionTable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calc.h" />
+    <ClInclude Include="FunctionTable.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Scanner.h" />

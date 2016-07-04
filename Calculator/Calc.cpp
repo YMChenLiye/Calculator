@@ -5,6 +5,16 @@ Storage & Calc::GetStorage()
 	return storage_;
 }
 
+PtrFun Calc::GetFunction(unsigned int id) const
+{
+	return funTbl_.GetFunction(id);
+}
+
+bool Calc::IsFunction(unsigned int id) const
+{
+	return id < funTbl_.Size();
+}
+
 unsigned int Calc::AddSymbol(const std::string & str)
 {
 	return symTbl_.Add(str);

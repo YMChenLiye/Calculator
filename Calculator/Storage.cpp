@@ -3,6 +3,7 @@
 #include "SymbolTable.h"
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 Storage::~Storage()
 {
@@ -26,11 +27,14 @@ bool Storage::IsInit(unsigned int id) const
 
 void Storage::AddConstants(SymbolTable & tbl)
 {
+	std::cout << "variable list:" << std::endl;
 	unsigned int id = tbl.Add("e");
 	AddValue(id, exp(1.0));
+	std::cout << "e = " << exp(1.0) << std::endl;
 
 	id = tbl.Add("pi");
 	AddValue(id, 2.0*acos(0.0));	//·´ÓàÏÒ pi = 2*acos(0)
+	std::cout << "pi = " << 2.0*acos(0.0) << std::endl;
 }
 
 double Storage::GetValue(unsigned int id) const

@@ -36,6 +36,9 @@
     <ClCompile Include="Calc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FunctionTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Calc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
