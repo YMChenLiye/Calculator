@@ -13,6 +13,11 @@ Parser::Parser(Scanner& scanner, Calc& calc) :scanner_(scanner), calc_(calc), tr
 {
 }
 
+Parser::~Parser()
+{
+	//delete tree_;
+}
+
 STATUS Parser::Parse()
 {
 	tree_ = Expr();
@@ -24,9 +29,9 @@ STATUS Parser::Parse()
 	return status_;
 }
 
-Node* Parser::Expr()
+std::auto_ptr<Node> Parser::Expr()
 {
-	Node* node = Term();
+	std::auto_ptr<Node> node = Term();
 	EToken token = scanner_.Token();
 	//if (token == TOKEN_PLUS)
 	//{
@@ -44,11 +49,11 @@ Node* Parser::Expr()
 	//Expr := Term { ('+' | '-') Term }
 	if (token == TOKEN_PLUS || token == TOKEN_MINUS)
 	{
-		MultipleNode* multipleNode = new SumNode(node);
+		std::auto_ptr<MultipleNode> multipleNode(new SumNode(node));
 		do
 		{
 			scanner_.Accept();
-			Node* nextNode = Term();
+			std::auto_ptr<Node> nextNode = Term();
 			multipleNode->AppendChild(nextNode, (token == TOKEN_PLUS));
 			token = scanner_.Token();
 		} while (token == TOKEN_PLUS || token==TOKEN_MINUS);
@@ -58,10 +63,10 @@ Node* Parser::Expr()
 	{
 		//Expr := Term = Expr
 		scanner_.Accept();
-		Node* nodeRight = Expr();
+		std::auto_ptr<Node> nodeRight = Expr();
 		if (node->IsLvalue())
 		{
-			node = new AssignNode(node, nodeRight);
+			node = std::auto_ptr<Node>(new AssignNode(node, nodeRight));
 		}
 		else
 		{
@@ -74,9 +79,9 @@ Node* Parser::Expr()
 	return node;
 }
 
-Node* Parser::Term()
+std::auto_ptr<Node> Parser::Term()
 {
-	Node* node = Factor();
+	std::auto_ptr<Node> node = Factor();
 	EToken token = scanner_.Token();
 	//if (token == TOKEN_MULTIPLY)
 	//{
@@ -94,11 +99,11 @@ Node* Parser::Term()
 	//Term := Factor { ('*' | '/') Factor }
 	if (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE)
 	{
-		MultipleNode* multipleNode = new ProductNode(node);
+		std::auto_ptr<MultipleNode> multipleNode(new ProductNode(node));
 		do
 		{
 			scanner_.Accept();
-			Node* nextNode = Factor();
+			std::auto_ptr<Node> nextNode = Factor();
 			multipleNode->AppendChild(nextNode, (token == TOKEN_MULTIPLY));
 			token = scanner_.Token();
 		} while (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE);
@@ -108,9 +113,9 @@ Node* Parser::Term()
 	return node;
 }
 
-Node* Parser::Factor()
+std::auto_ptr<Node> Parser::Factor()
 {
-	Node* node = 0;
+	std::auto_ptr<Node> node;
 	EToken token = scanner_.Token();
 	if (token == TOKEN_LPARENTHESIS)
 	{
@@ -126,12 +131,11 @@ Node* Parser::Factor()
 			//todo:throw exception
 			//std::cout << "missing parenthesis" << std::endl;
 			throw SyntaxError("missing parenthesis");
-			node = 0;
 		}
 	}
 	else if (token == TOKEN_NUMBER)
 	{
-		node = new NumberNode(scanner_.Number());
+		node = std::auto_ptr<Node>(new NumberNode(scanner_.Number()));
 		scanner_.Accept();
 	}
 	else if (token == TOKEN_IDENTIFIER)
@@ -149,7 +153,7 @@ Node* Parser::Factor()
 				scanner_.Accept(); // accept ')'
 				if (id != SymbolTable::IDNOTFOUND && calc_.IsFunction(id))
 				{
-					node = new FunctionNode(node, calc_.GetFunction(id));
+					node = std::auto_ptr<Node>(new FunctionNode(node, calc_.GetFunction(id)));
 				}
 				else
 				{
@@ -173,14 +177,14 @@ Node* Parser::Factor()
 			{
 				id = calc_.AddSymbol(symbol);
 			}
-			node = new VariableNode(id, calc_.GetStorage());
+			node = std::auto_ptr<Node>(new VariableNode(id, calc_.GetStorage()));
 		}
 		
 	}
 	else if (token == TOKEN_MINUS)
 	{
 		scanner_.Accept();	//accept '-'
-		node = new UMinusNode(Factor());
+		node = std::auto_ptr<Node>(new UMinusNode(Factor()));
 	}
 	else
 	{
@@ -194,7 +198,7 @@ Node* Parser::Factor()
 
 double Parser::Calculate() const
 {
-	assert(tree_ != 0);
+	assert(tree_.get() != 0);
 	return tree_->Calc();
 }
 

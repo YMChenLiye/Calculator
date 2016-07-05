@@ -40,6 +40,11 @@ int main(void)
 				status = STATUS_QUIT;
 				std::cout << e.what() << std::endl;
 			}
+			catch (std::bad_alloc& e)
+			{
+				status = STATUS_QUIT;
+				std::cout << e.what() << std::endl;
+			}
 			catch (...)
 			{
 				status = STATUS_QUIT;
