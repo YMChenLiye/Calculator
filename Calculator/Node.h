@@ -1,10 +1,10 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
+#include <cassert>
+#include <vector>
 #include "FunctionTable.h"
 #include "Storage.h"
-#include <vector>
-#include <cassert>
 
 class Noncopyable
 {

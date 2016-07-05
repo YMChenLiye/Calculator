@@ -1,9 +1,8 @@
-#include "Storage.h"
-
-#include "SymbolTable.h"
 #include <cmath>
 #include <cassert>
 #include <iostream>
+#include "Storage.h"
+#include "SymbolTable.h"
 
 Storage::~Storage()
 {

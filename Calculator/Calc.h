@@ -1,11 +1,10 @@
 #ifndef _CALC_H_
 #define _CALC_H_
 
+#include <string>
 #include "SymbolTable.h"
 #include "Storage.h"
 #include "FunctionTable.h"
-
-#include <string>
 
 class Parser;
 

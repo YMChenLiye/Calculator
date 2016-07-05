@@ -1,0 +1,18 @@
+﻿Build started 2016/7/5 16:56:23.
+     1>Project "C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\CalculatorTest\CalculatorTest.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp Tracer.cpp
+         main.cpp
+         Tracer.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\Release\CalculatorTest.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\Release\CalculatorTest.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\Release\CalculatorTest.lib" /MACHINE:X86 /SAFESEH Release\main.obj
+         Release\Tracer.obj
+         Generating code
+         All 1 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+         Finished generating code
+         CalculatorTest.vcxproj -> C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\Release\CalculatorTest.exe
+     1>Done Building Project "C:\Users\root\Documents\Visual Studio 2015\Projects\Calculator\CalculatorTest\CalculatorTest.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.53

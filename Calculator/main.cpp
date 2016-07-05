@@ -3,6 +3,7 @@
 #include "Parser.h"
 #include "Scanner.h"
 #include "Calc.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -20,16 +21,37 @@ int main(void)
 		if (!scanner.IsEmpty())
 		{
 			Parser parse(scanner, calc);
-			status = parse.Parse();
-			if (status == STATUS_OK)
+			try
 			{
-				std::cout << parse.Calculate() << std::endl;
+				status = parse.Parse();
+				if (status == STATUS_OK)
+				{
+					std::cout << parse.Calculate() << std::endl;
+				}
 			}
-			else
-				std::cout << "Syntax Error." << std::endl;
+			catch (SyntaxError& se)
+			{
+				status = STATUS_QUIT;
+				std::cout << se.what() << std::endl;
+				//std::cout << se.StackTrace() << std::endl;
+			}
+			catch (Exception& e)
+			{
+				status = STATUS_QUIT;
+				std::cout << e.what() << std::endl;
+			}
+			catch (...)
+			{
+				status = STATUS_QUIT;
+				std::cout << "Internl error" << std::endl;
+			}
 		}
 		else
+		{
+			status = STATUS_QUIT;
 			std::cout << "Expression is empty" << std::endl;
+		}
+			
 
 
 	} while (status != STATUS_QUIT);

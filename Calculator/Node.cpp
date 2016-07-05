@@ -1,7 +1,8 @@
-#include "Node.h"
+#include <cassert>
 #include <cmath>
 #include <iostream>
-#include <cassert>
+#include "Node.h"
+#include "DebugNew.h"
 
 double NumberNode::Calc() const
 {

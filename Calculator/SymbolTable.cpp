@@ -1,6 +1,7 @@
-#include "SymbolTable.h"
 
 #include <algorithm>
+#include "SymbolTable.h"
+#include "Exception.h"
 unsigned int SymbolTable::Add(const std::string & str)
 {
 	dictionary_[str] = curId_;
@@ -38,6 +39,10 @@ std::string SymbolTable::GetSymbolName(unsigned int id) const
 {
 	std::map<const std::string, unsigned>::const_iterator it;
 	it = find_if(dictionary_.begin(), dictionary_.end(), IsEqualId(id));
+	if (it == dictionary_.end())
+	{
+		throw Exception("internal error: missing enrty in symbol table.");
+	}
 
 	return it->first;
 }

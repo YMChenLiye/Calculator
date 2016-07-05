@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calc.cpp" />
+    <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FunctionTable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -154,15 +155,19 @@
     <ClCompile Include="Scanner.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
+    <ClCompile Include="Tracer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calc.h" />
+    <ClInclude Include="DebugNew.h" />
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="FunctionTable.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Scanner.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="SymbolTable.h" />
+    <ClInclude Include="Tracer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
