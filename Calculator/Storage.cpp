@@ -13,6 +13,33 @@ Storage::Storage(SymbolTable & tbl)
 	AddConstants(tbl);
 }
 
+void Storage::Serialize(Serializer & out) const
+{
+	out << cells_.size();
+	for (unsigned int i = 0; i < cells_.size(); ++i)
+		out << cells_[i] << inits_[i];
+}
+
+void Storage::DeSerialize(DeSerializer & in)
+{
+	cells_.clear();
+	inits_.clear();
+	unsigned int size;
+	in >> size;
+	cells_.resize(size);
+	inits_.resize(size);
+
+	for (unsigned int i = 0; i < size; ++i)
+	{
+		double d;
+		bool b;
+		in >> d >> b;
+		cells_[i] = d; 
+		inits_[i] = b;
+	}
+		
+}
+
 void Storage::Clear()
 {
 	cells_.clear();
@@ -44,13 +71,14 @@ double Storage::GetValue(unsigned int id) const
 
 void Storage::SetValue(unsigned int id, double val)
 {
-	assert(id <= cells_.size());
+
+	assert(id >= 0);
 	if (id < cells_.size())
 	{
 		cells_[id] = val;
 		inits_[id] = true;
 	}
-	else if(id == cells_.size())
+	else
 	{
 		AddValue(id, val);
 	}

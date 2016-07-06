@@ -4,6 +4,7 @@
 #include "Scanner.h"
 #include "Calc.h"
 #include "CommandParser.h"
+#include "Exception.h"
 
 
 
@@ -92,22 +93,57 @@ void CommandParser::Help() const
 void CommandParser::ListVar() const
 {
 	std::cout << "variable list:" << std::endl;
+	calc_.ListVar();
 }
 
+const long Version = 1;
 void CommandParser::ListFun() const
 {
 	std::cout << "function list:" << std::endl;
+	calc_.ListFun();
 }
 
 STATUS CommandParser::Load(const std::string & fileName)
 {
 	std::cout << "load " << fileName << std::endl;
-	return STATUS_OK;
+	STATUS status = STATUS_OK;
+	try
+	{
+		DeSerializer in(fileName);
+		long version;
+		in >> version;
+		if (version != Version)
+			throw Exception("miss match version");
+		calc_.DeSerialize(in);
+	}
+	catch (FileStreamError& e)
+	{
+		std::cout << "Load Error: " << e.what() << std::endl;
+		status = STATUS_ERROR;
+	}
+	catch (Exception& e)
+	{
+		std::cout << "Load Error: " << e.what() << std::endl;
+		status = STATUS_ERROR;
+	}
+	return status;
 }
 
 STATUS CommandParser::Save(const std::string & fileName)
 {
 	std::cout << "Save " << fileName << std::endl;
-	return STATUS_OK;
+	STATUS status = STATUS_OK;
+	try
+	{
+		Serializer out(fileName);
+		out << Version;
+		calc_.Serialize(out);
+	}
+	catch (FileStreamError& e)
+	{
+		std::cout << "Save Error: " << e.what() << std::endl;
+		status = STATUS_ERROR;
+	}
+	return status;
 }
 

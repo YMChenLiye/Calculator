@@ -5,16 +5,22 @@
 #include "SymbolTable.h"
 #include "Storage.h"
 #include "FunctionTable.h"
+#include "Serial.h"
 
 class Parser;
 
 
-class Calc
+class Calc :public Serializable
 {
 	friend class Parser;
 public:
 	Calc() :funTbl_(symTbl_),storage_(symTbl_)  {}
+	void Serialize(Serializer& out) const;
+	void DeSerialize(DeSerializer& in);
+	void ListFun() const;
+	void ListVar() const;
 private:
+	bool GetVariableValue(unsigned int id, double& val) const;
 	Storage& GetStorage();
 	PtrFun GetFunction(unsigned int id) const;
 	bool IsFunction(unsigned int id) const;

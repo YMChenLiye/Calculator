@@ -27,4 +27,13 @@ public:
 	explicit SyntaxError(const char* message) :Exception(message) {}
 	virtual ~SyntaxError() throw() {}
 };
+
+class FileStreamError :public Exception
+{
+public:
+	explicit FileStreamError(const char* message) :Exception(message) {}
+	virtual ~FileStreamError() throw() {}
+};
+
+
 #endif //_EXCEPTION_H_
