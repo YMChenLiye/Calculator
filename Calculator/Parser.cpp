@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cstring>
 #include <iostream>
+#include <sstream>
 #include "Parser.h"
 #include "Scanner.h"
 #include "Node.h"
@@ -160,8 +161,10 @@ std::auto_ptr<Node> Parser::Factor()
 					status_ = STATUS_ERROR;
 					//std::cout << "Unknow function " << "\"" << symbol << "\"" << std::endl;
 					char buf[256] = { 0 };
-					sprintf_s(buf, "Unknow function \"%s\".", symbol.c_str());
-					throw SyntaxError(buf);
+					//sprintf_s(buf, "Unknow function \"%s\".", symbol.c_str());
+					std::ostringstream oss;
+					oss << "Unknow function \"" << symbol << "\".";
+					throw SyntaxError(oss.str().c_str());
 				}
 			}
 			else

@@ -14,10 +14,10 @@ int main(void)
 	do
 	{
 		std::cout << "> ";
-		std::string buf;
-		std::getline(std::cin, buf);
+		//std::string buf;
+		//std::getline(std::cin, buf);
 		//std::cout << buf << endl;
-		Scanner scanner(buf);
+		Scanner scanner(std::cin);
 		if (!scanner.IsEmpty())
 		{
 			Parser parse(scanner, calc);
