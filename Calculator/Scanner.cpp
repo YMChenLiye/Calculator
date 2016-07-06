@@ -44,6 +44,9 @@ void Scanner::Accept()
 	ReadChar();
 	switch (look_)
 	{
+	case '!':
+		token_ = TOKEN_COMMAND;
+		break;
 	case '+':
 		token_ = TOKEN_PLUS;
 		break;
@@ -94,6 +97,17 @@ void Scanner::Accept()
 	}
 }
 
+void Scanner::AcceptCommand()
+{
+	ReadChar();
+	symbol_.erase();
+	while (!isspace(look_))
+	{
+		symbol_ += look_;
+		look_ = in_.get();
+	}
+}
+
 bool Scanner::IsEmpty() const
 {
 	return isEmpty_;
@@ -102,6 +116,11 @@ bool Scanner::IsEmpty() const
 bool Scanner::IsDone() const
 {
 	return token_ == TOKEN_END;
+}
+
+bool Scanner::IsCommand() const
+{
+	return token_ == TOKEN_COMMAND;
 }
 
 

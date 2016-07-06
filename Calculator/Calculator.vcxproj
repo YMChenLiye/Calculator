@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calc.cpp" />
+    <ClCompile Include="CommandParser.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FunctionTable.cpp" />
     <ClCompile Include="main.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calc.h" />
+    <ClInclude Include="CommandParser.h" />
     <ClInclude Include="DebugNew.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FunctionTable.h" />
