@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="DebugNew.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="ptr_vector.h" />
     <ClInclude Include="Tracer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

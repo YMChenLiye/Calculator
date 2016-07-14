@@ -167,6 +167,7 @@
     <ClInclude Include="FunctionTable.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="ptr_vector.h" />
     <ClInclude Include="Scanner.h" />
     <ClInclude Include="Serial.h" />
     <ClInclude Include="Storage.h" />

@@ -4,6 +4,7 @@
 #include "Node.h"
 #include "DebugNew.h"
 
+
 double NumberNode::Calc() const
 {
 	return number_;
@@ -54,11 +55,11 @@ double UMinusNode::Calc() const
 
 MultipleNode::~MultipleNode()
 {
-	std::vector<Node*>::const_iterator it;
-	for (it = childs_.begin(); it != childs_.end(); ++it)
-	{
-		delete *it;
-	}
+	//std::vector<Node*>::const_iterator it;
+	//for (it = childs_.begin(); it != childs_.end(); ++it)
+	//{
+	//	delete *it;
+	//}
 }
 
 double SumNode::Calc() const

@@ -6,6 +6,7 @@
 #include <memory>
 #include "FunctionTable.h"
 #include "Storage.h"
+#include "ptr_vector.h"
 
 class Noncopyable
 {
@@ -116,12 +117,14 @@ public:
 	}
 	void AppendChild(std::auto_ptr<Node>& node,bool positive)
 	{
-		childs_.push_back(node.release());
+		//childs_.push_back(node.release());
+		childs_.push_back(node);
 		positives_.push_back(positive);
 	}
 	~MultipleNode();
 protected:
-	std::vector<Node*> childs_;
+	//std::vector<Node*> childs_;
+	ptr_vector<Node> childs_;
 	std::vector<bool> positives_;
 };
 
